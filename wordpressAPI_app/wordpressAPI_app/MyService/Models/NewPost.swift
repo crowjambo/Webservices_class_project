@@ -19,11 +19,21 @@ struct NewPost: Codable {
 
     }
     
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(title, forKey: .title)
-        try container.encodeIfPresent(content, forKey: .content)
-
+    func ToTask() -> Task {
+        guard
+            let id = self.id,
+            let title = self.title,
+            let content = self.content
+            else { return Task(id: 0, title: "failedToLoad", content: "failedToLoad")}
+        return Task(id: id, title: title, content: content)
     }
+    
+}
+
+
+public struct WPAPIText : Codable {
+    let raw: String?
+    let rendered : String?
+    let protected : Bool?
+    
 }
