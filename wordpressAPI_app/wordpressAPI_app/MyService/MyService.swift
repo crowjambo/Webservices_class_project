@@ -19,10 +19,10 @@ class MyService {
     private var token: String?
     private var user: User?
     
-    let baseURL: String = "https://www.iosbackendwebservices.fun/wp-json/"
-    let postsURL: String = "wp/v2/posts/"
-    let authURL: String = "jwt-auth/v1/token?"
-    let usersURL: String = "wp/v2/users/"
+    let baseURL: String = "https://www.iosbackendwebservices.fun/wp-json"
+    let postsURL: String = "/wp/v2/posts"
+    let authURL: String = "/jwt-auth/v1/token?"
+    let usersURL: String = "/wp/v2/users/"
     
     private init(token: String? = nil){
         self.token = token
@@ -42,6 +42,30 @@ class MyService {
     func getPosts(completionHandler: @escaping PostsResponse) {
 
         guard let url = URL(string: "\(baseURL)\(postsURL)") else { return }
+        AF.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { (response) in
+            switch response.result {
+            case .success:
+                do {
+                    guard let data = response.data else { return }
+                    let posts = try JSONDecoder().decode([NewPost].self, from: data)
+                    completionHandler(.success(posts))
+                } catch {
+                    
+                }
+            case .failure(let err):
+                completionHandler(.failure(err))
+            }
+        }
+        
+    }
+    
+    func getPostsByAuthor(completionHandler: @escaping PostsResponse) {
+        guard
+            let user = user,
+            let authorId = user.id
+        else { return }
+    
+        guard let url = URL(string: "\(baseURL)\(postsURL)?author=\(authorId)") else { return }
         AF.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { (response) in
             switch response.result {
             case .success:
@@ -90,7 +114,7 @@ class MyService {
     
     func deletePostById(id: Int, completionHandler: @escaping PostResponse) {
         guard let token = token else { return }
-        guard let url = URL(string: "\(baseURL)\(postsURL)\(String(id))") else { return }
+        guard let url = URL(string: "\(baseURL)\(postsURL)/\(String(id))") else { return }
         
         let headers:HTTPHeaders = ["Authorization" : "Bearer \(token)",
                            "Content-Type": "application/json"]

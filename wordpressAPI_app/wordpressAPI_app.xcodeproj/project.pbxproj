@@ -16,6 +16,7 @@
 		86719A3E2474C3EA001AB364 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86719A3C2474C3EA001AB364 /* Main.storyboard */; };
 		86719A402474C3EC001AB364 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86719A3F2474C3EC001AB364 /* Assets.xcassets */; };
 		86719A432474C3EC001AB364 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86719A412474C3EC001AB364 /* LaunchScreen.storyboard */; };
+		8683813E2477CF00003AC890 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8683813D2477CF00003AC890 /* String+Extensions.swift */; };
 		869F49FB2477103B00B0E93D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F49FA2477103B00B0E93D /* User.swift */; };
 		869F49FD24771B8F00B0E93D /* IntroScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F49FC24771B8F00B0E93D /* IntroScreenViewController.swift */; };
 		869F4A012477338B00B0E93D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869F4A002477338B00B0E93D /* RegisterViewController.swift */; };
@@ -37,6 +38,7 @@
 		86719A3F2474C3EC001AB364 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86719A422474C3EC001AB364 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86719A442474C3EC001AB364 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8683813D2477CF00003AC890 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		869F49FA2477103B00B0E93D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		869F49FC24771B8F00B0E93D /* IntroScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScreenViewController.swift; sourceTree = "<group>"; };
 		869F4A002477338B00B0E93D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				86719A382474C3E9001AB364 /* SceneDelegate.swift */,
 				86719A3F2474C3EC001AB364 /* Assets.xcassets */,
 				86719A412474C3EC001AB364 /* LaunchScreen.storyboard */,
+				8683813D2477CF00003AC890 /* String+Extensions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				869F4A012477338B00B0E93D /* RegisterViewController.swift in Sources */,
 				86AE191524755F2500B16B97 /* Token.swift in Sources */,
 				86719A3B2474C3E9001AB364 /* TasksViewController.swift in Sources */,
+				8683813E2477CF00003AC890 /* String+Extensions.swift in Sources */,
 				869F49FD24771B8F00B0E93D /* IntroScreenViewController.swift in Sources */,
 				861A8B5C2476562E00A033FF /* TaskCell.swift in Sources */,
 				861A8B59247654B900A033FF /* Task.swift in Sources */,

@@ -4,11 +4,13 @@ struct NewPost: Codable {
     var id: Int?
     var title: String?
     var content: String?
+    var author: Int?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
         case content = "content"
+        case author = "author"
     }
     
      public init(from decoder: Decoder) throws {
@@ -16,6 +18,7 @@ struct NewPost: Codable {
         id = try values.decodeIfPresent(Int.self, forKey: .id)
         title = (try values.decodeIfPresent(WPAPIText.self, forKey: .title))?.rendered
         content = (try values.decodeIfPresent(WPAPIText.self, forKey: .content))?.rendered
+        author = try values.decodeIfPresent(Int.self, forKey: .author)
 
     }
     

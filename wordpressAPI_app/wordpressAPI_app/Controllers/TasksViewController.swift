@@ -6,19 +6,33 @@ class ViewController: UIViewController {
     
     var tasks: [Task] = []
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var createTaskView: UIView!
+    @IBOutlet weak var contentBox: UITextField!
+    @IBOutlet weak var titleBox: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
+        welcomeLabel.text = "Hello! \(MyService.shared.getCurrentUser()?.name ?? "failed to load")"
+        createTaskView.isHidden = true
+        setupKeyboardTap()
+        resetTasksFully()
     }
 
-    @IBAction func buttonClicked(_ sender: Any) {
+
+    @IBAction func createPressed(_ sender: Any) {
+        createTaskView.isHidden = false
+
+    }
+    
+    @IBAction func loadPressed(_ sender: Any) {
         loadPosts()
     }
     
-    @IBAction func redButtonClicked(_ sender: Any) {
+    @IBAction func submitPressed(_ sender: Any) {
+        createTaskView.isHidden = true
         createPost()
     }
 }
@@ -32,15 +46,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TaskCell
-            
-        cell.titleLabel.text = tasks[indexPath.row].title
-        cell.contentText.text = tasks[indexPath.row].content
-            
-        //using protocols give reference to each cell to this view controller
-//        cell.delegate = self
-//        cell.indexP = indexPath.row
-        
-        // one cell is created
+        cell.titleLabel.text = tasks[indexPath.row].title.html2String
+        cell.contentText.text = tasks[indexPath.row].content.html2String
         return cell
     }
     
@@ -58,7 +65,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 extension ViewController{
     
     private func resetTasksFully(){
-        MyService.shared.getPosts { (response) in
+        MyService.shared.getPostsByAuthor { (response) in
             switch response {
             case .success(let posts):
                 self.tasks.removeAll()
@@ -101,12 +108,14 @@ extension ViewController {
     }
     
     func createPost() {
-        //get title and content from input fields here
-
-        MyService.shared.createPost(title: "NEWNEW", content: "newnew2") { (response) in
+        guard let title = titleBox.text,
+            let content = contentBox.text
+        else { return }
+        MyService.shared.createPost(title: title, content: content) { (response) in
             switch response {
             case .success(let str):
                 print(str)
+                self.resetTasksFully()
             case .failure(let err):
                 print(err)
             }
